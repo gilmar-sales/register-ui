@@ -8,31 +8,37 @@ import {
   GridItem,
   Input,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 
 import { Logo } from "../../components/Logo";
+import TokenPayload from "../../@types/TokenPayload";
+import AuthContext from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LOGIN = gql`
-mutation login(($email: String!, $password: String!)) {
-  login(data: {email: $email password: $password}) {
-    access_token
+  mutation login($email: String!, $password: String!) {
+    login(data: { email: $email, password: $password }) {
+      access_token
+    }
   }
-}
 `;
 
 const Login: React.FC = () => {
-  const [login] = useMutation(LOGIN);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [login] = useMutation(LOGIN);
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
     login({ variables: { email, password } })
       .then((response) => {
-        console.log(response.data);
-        // authCtx.handleLogin(response.data.login as TokenPayload);
+        authCtx.handleLogin(response.data.login as TokenPayload);
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);
