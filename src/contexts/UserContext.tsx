@@ -25,9 +25,9 @@ const GET_USER = gql`
 export const UserContextProvider: React.FC = (props) => {
   const [user, setUser] = usePersistedState<User>("@user", {} as User);
   const { data, loading } = useQuery(GET_USER);
+
   useEffect(() => {
-    console.log(data);
-    setUser(data as User);
+    if (data?.getUser) setUser(data?.getUser as User);
   }, [loading, data, setUser]);
 
   const isAdmin = () => {
