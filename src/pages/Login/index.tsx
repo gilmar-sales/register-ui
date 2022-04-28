@@ -10,11 +10,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { Navigate } from "react-router-dom";
 
 import { Logo } from "../../components/Logo";
 import TokenPayload from "../../@types/TokenPayload";
 import AuthContext from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -29,7 +29,6 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const authCtx = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const [login] = useMutation(LOGIN);
   const handleSubmit = (event: any) => {
@@ -38,13 +37,14 @@ const Login: React.FC = () => {
     login({ variables: { email, password } })
       .then((response) => {
         authCtx.handleLogin(response.data.login as TokenPayload);
-        navigate("/dashboard");
       })
       .catch((error) => {
         console.log(error);
         // setError(field, { message });
       });
   };
+
+  if (authCtx.isAuthenticated()) return <Navigate to={"/dashboard"} />;
 
   return (
     <Grid templateColumns="1fr 2fr" gap={6} bg="black">
@@ -75,14 +75,14 @@ const Login: React.FC = () => {
           flexDirection={"column"}
           justifyContent={"center"}
         >
-          <Flex
-            direction={"column"}
-            gap="1rem"
-            bg="white"
-            borderRadius={"1rem"}
-            p={"2rem"}
-          >
-            <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
+            <Flex
+              direction={"column"}
+              gap="1rem"
+              bg="white"
+              borderRadius={"1rem"}
+              p={"2rem"}
+            >
               <FormControl isRequired>
                 <FormLabel htmlFor="email">E-mail</FormLabel>
                 <Input
@@ -110,8 +110,8 @@ const Login: React.FC = () => {
               >
                 Login
               </Button>
-            </form>
-          </Flex>
+            </Flex>
+          </form>
         </Box>
       </GridItem>
     </Grid>
