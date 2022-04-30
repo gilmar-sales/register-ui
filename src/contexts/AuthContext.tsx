@@ -27,7 +27,6 @@ export const AuthContextProvider: React.FC = (props) => {
     setTokenPayload(tokenPayload);
 
     const user = jwt_decode(tokenPayload.access_token!) as User;
-    console.log(user);
     setUser(user);
   };
 
