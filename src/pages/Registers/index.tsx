@@ -6,6 +6,7 @@ import Register from "../../@types/Register";
 import LogoIcon from "../../components/LogoIcon";
 import RegistersList from "../../components/RegistersList";
 import TabsPanel from "../../components/TabsPanel";
+import CreateRegisterDrawer from "../../components/CreateRegisterDrawer";
 
 const REGISTERS = gql`
   query findUserRegisters {
@@ -62,6 +63,11 @@ const Registers: React.FC = () => {
               <Button ref={btnRef} size="lg" fontWeight="extrabold">
                 Register
               </Button>
+              <CreateRegisterDrawer
+                btnRef={btnRef}
+                setRegisters={setRegisters}
+                registers={registers}
+              />
             </Flex>
 
             <Flex justifyContent="center" width="100%">
