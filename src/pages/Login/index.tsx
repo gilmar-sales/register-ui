@@ -7,14 +7,14 @@ import {
   Grid,
   GridItem,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { Navigate } from "react-router-dom";
-
 import { Logo } from "../../components/Logo";
 import TokenPayload from "../../@types/TokenPayload";
 import AuthContext from "../../contexts/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const LOGIN = gql`
   mutation login($email: String!, $password: String!) {
@@ -27,27 +27,51 @@ const LOGIN = gql`
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const toast = useToast();
 
   const authCtx = useContext(AuthContext);
 
-  const [login] = useMutation(LOGIN);
+  const [login] = useMutation(LOGIN, {
+    onError: (error) => {
+      error.graphQLErrors.forEach((gqlError) => {
+        const errors = gqlError.extensions.response as {
+          error: string;
+          statusCode: number;
+          message: string[];
+        };
+
+        Array(errors.message)
+          .flat()
+          .forEach((errorMessage) => {
+            toast({
+              variant: "left-accent",
+              status: "error",
+              title: errors.error,
+              description: errorMessage,
+              duration: 1000,
+              position: "bottom-right",
+            });
+          });
+      });
+    },
+    onCompleted: (data) => {
+      authCtx.handleLogin(data.login as TokenPayload);
+    },
+  });
+
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
-    login({ variables: { email, password } })
-      .then((response) => {
-        authCtx.handleLogin(response.data.login as TokenPayload);
-      })
-      .catch((error) => {
-        console.log(error);
-        // setError(field, { message });
-      });
+    login({ variables: { email, password } });
   };
 
-  if (authCtx.isAuthenticated()) return <Navigate to={"/dashboard"} />;
+  if (authCtx.isAuthenticated())
+    return (
+      <Navigate to={authCtx.isAdmin() ? "/dashboard" : "/registers"} replace />
+    );
 
   return (
-    <Grid templateColumns="1fr 2fr" gap={6} bg="black">
+    <Grid templateColumns="1fr 2fr" gap={6} bg="blackAlpha.900">
       <GridItem
         display={"flex"}
         w="100%"
@@ -64,55 +88,57 @@ const Login: React.FC = () => {
         flexDirection={"column"}
         justifyContent={"center"}
       >
-        <Box
-          minH={"600px"}
-          marginLeft={"20rem"}
-          bgImage={"url(shape.svg)"}
-          bgSize={"cover"}
-          backgroundPosition={"left"}
-          p={"4rem"}
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"center"}
-        >
-          <form onSubmit={handleSubmit}>
-            <Flex
-              direction={"column"}
-              gap="1rem"
-              bg="white"
-              borderRadius={"1rem"}
-              p={"2rem"}
-            >
-              <FormControl isRequired>
-                <FormLabel htmlFor="email">E-mail</FormLabel>
-                <Input
-                  id="email"
-                  placeholder="E-mail"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </FormControl>
-
-              <FormControl isRequired>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Password"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-              </FormControl>
-              <Button
-                type="submit"
-                bgColor={"green.400"}
-                color="white"
-                _hover={{ bgColor: "green.300" }}
-                _active={{ bgColor: "green.500" }}
+        <Flex width={"100%"} justifyContent={"flex-end"}>
+          <Box
+            height={"650px"}
+            width={"650px"}
+            bgImage={"url(shape.svg)"}
+            bgSize={"cover"}
+            backgroundPosition={"left"}
+            p={"4rem"}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+          >
+            <form onSubmit={handleSubmit}>
+              <Flex
+                direction={"column"}
+                gap="1rem"
+                bg="white"
+                borderRadius={"2rem"}
+                p={"2rem"}
               >
-                Login
-              </Button>
-            </Flex>
-          </form>
-        </Box>
+                <FormControl isRequired>
+                  <FormLabel htmlFor="email">E-mail</FormLabel>
+                  <Input
+                    id="email"
+                    placeholder="E-mail"
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                </FormControl>
+                <Button
+                  type="submit"
+                  bgColor={"green.400"}
+                  color="white"
+                  _hover={{ bgColor: "green.300" }}
+                  _active={{ bgColor: "green.500" }}
+                >
+                  Login
+                </Button>
+              </Flex>
+            </form>
+          </Box>
+        </Flex>
       </GridItem>
     </Grid>
   );
