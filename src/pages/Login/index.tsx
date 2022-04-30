@@ -4,8 +4,6 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Grid,
-  GridItem,
   Input,
   useToast,
 } from "@chakra-ui/react";
@@ -71,76 +69,66 @@ const Login: React.FC = () => {
     );
 
   return (
-    <Grid templateColumns="1fr 2fr" gap={6} bg="blackAlpha.900">
-      <GridItem
-        display={"flex"}
-        w="100%"
-        h="100vh"
-        justifyContent={"center"}
-        justifyItems={"center"}
-      >
-        <Logo w={"400px"} />
-      </GridItem>
-      <GridItem
-        w="100%"
-        h="100vh"
-        display={"flex"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-      >
-        <Flex width={"100%"} justifyContent={"flex-end"}>
-          <Box
-            height={"650px"}
-            width={"650px"}
-            bgImage={"url(shape.svg)"}
-            bgSize={"cover"}
-            backgroundPosition={"left"}
-            p={"4rem"}
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-          >
-            <form onSubmit={handleSubmit}>
-              <Flex
-                direction={"column"}
-                gap="1rem"
-                bg="white"
-                borderRadius={"2rem"}
-                p={"2rem"}
-              >
-                <FormControl isRequired>
-                  <FormLabel htmlFor="email">E-mail</FormLabel>
-                  <Input
-                    id="email"
-                    placeholder="E-mail"
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                </FormControl>
+    <Flex
+      height="100vh"
+      direction={{ md: "column", lg: "row" }}
+      bg="blackAlpha.900"
+      alignItems="center"
+      overflow="auto"
+    >
+      <Logo w={"400px"} marginBottom={{ md: "3rem", lg: "none" }} />
+      <Flex width={"100%"} justifyContent="flex-end">
+        <Box
+          height={"650px"}
+          width={"650px"}
+          bgImage={"url(shape.svg)"}
+          bgSize={"cover"}
+          backgroundPosition={"left"}
+          p={"4rem"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+        >
+          <form onSubmit={handleSubmit}>
+            <Flex
+              direction={"column"}
+              gap="1rem"
+              bg="white"
+              borderRadius={"2rem"}
+              p={"2rem"}
+            >
+              <FormControl isRequired>
+                <FormLabel htmlFor="email">E-mail</FormLabel>
+                <Input
+                  id="email"
+                  placeholder="E-mail"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+              </FormControl>
 
-                <FormControl isRequired>
-                  <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                </FormControl>
-                <Button
-                  type="submit"
-                  bgColor={"green.400"}
-                  color="white"
-                  _hover={{ bgColor: "green.300" }}
-                  _active={{ bgColor: "green.500" }}
-                >
-                  Login
-                </Button>
-              </Flex>
-            </form>
-          </Box>
-        </Flex>
-      </GridItem>
-    </Grid>
+              <FormControl isRequired>
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </FormControl>
+              <Button
+                type="submit"
+                bgColor={"green.400"}
+                color="white"
+                _hover={{ bgColor: "green.300" }}
+                _active={{ bgColor: "green.500" }}
+              >
+                Login
+              </Button>
+            </Flex>
+          </form>
+        </Box>
+      </Flex>
+    </Flex>
   );
 };
 
