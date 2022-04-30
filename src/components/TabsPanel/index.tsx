@@ -21,7 +21,7 @@ const TabsPanel: React.FC = () => {
       shadow={"md"}
     >
       <Flex width={"100%"} flexDirection={"column"} alignItems="center">
-        <LogoIcon color={"#39E991"} width={"3rem"} height={"3rem"} />
+        <LogoIcon size={"3rem"} />
         <Divider margin="0.3rem" />
         {authCtx.user.role === "administrator" ? (
           <TabButton

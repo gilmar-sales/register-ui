@@ -46,7 +46,7 @@ const Registers: React.FC = () => {
           justifyContent="center"
           alignItems="center"
         >
-          <LogoIcon height="5rem" width="5rem" />
+          <LogoIcon size="5rem" />
         </Flex>
       ) : (
         <Flex
