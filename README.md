@@ -1,59 +1,68 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <a href="https://github.com/gilmarxd/register-ui" target="blank"><img src="src/components/Logo/logo.svg" width="320" alt="Register Logo" /></a>
+</p>
+
+  <p align="center">The client-side of a system for management of the clock in records of the collaborators of a company</p>
+    <p align="center">
+<a href="#" target="_blank"><img src="https://img.shields.io/github/package-json/v/gilmarxd/register-ui" alt="Project Version" /></a>
+<a href="#" target="_blank"><img src="https://img.shields.io/github/license/gilmarxd/register-ui" alt="Package License" /></a>
+<a href="#" target="_blank"><img src="https://img.shields.io/github/repo-size/gilmarxd/register-ui" alt="Repo Size" /></a>
+<a href="#" target="_blank"><img src="https://img.shields.io/github/last-commit/gilmarxd/register-ui" alt="Last Commmit"/></a>
+</p>
+
+## Intent
+
+Instigate the candidate to solve a challenge in a while determined, in order to identify categories and technical weaknesses for better internal targeting and onboarding according to the practices and technologies used in the Brainny Smart Solutions.
+
+## Project
+
+The development proposal consists of the implementation of a system for the management of clock-in records of the employees of a company.
+
+### Abstract
+
+### Functional Requirements
+
+- **[FR01]** - Manage time records
+- **[FR02]** - Record the collaborator's arrival and departure times
+- **[FR03]** - The user with administrator permissions will be able to view in real time the records of collaborators, without need to refresh the page
+
+### Non-functional Requirements
+
+- **[NFR01]** - Only collaborators can record the point
+- **[NFR02]** - Only the administrator can view the list with collaborators's records;
+- **[NFR03]** - The system will use authentication with JWT
+- **[NFR04]** - Node API development;
+- **[NFR05]** - Web Client development in React.
+
+# Technologies
+
+- [ReactJS](https://reactjs.org/): A declarative, efficient, and flexible JavaScript library for building user interfaces.
+- [MaterialUI](https://material-ui.com/): Material-UI is a simple and customizable component library to build faster, beautiful, and more accessible React applications.
+- [GraphQL](https://github.com/graphql/graphql-js): GraphQL is a query language and execution engine tied to any backend service.
+
+## Installation
+
+```bash
+$ yarn
+```
 
 ## Available Scripts
 
-In the project directory, you can run:
+```bash
+# Runs the app in the development mode.
+$ yarn start
 
-### `yarn start`
+# Launches the test runner in the interactive watch mode.
+$ yarn test
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Builds the app for production to the build folder.
+$ yarn build
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+# This command will remove the single build dependency from your project.
+$ yarn eject
+```
 
-### `yarn test`
+## Informations
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
-
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
-
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Author - [Gilmar Custodio](https://github.com/gilmarxd)
+- This project is [MIT licensed](LICENSE).
