@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import TokenPayload from "../@types/TokenPayload";
 import User from "../@types/User";
 import usePersistedState from "../hooks/usePersistedState";
+import api from "../services/api";
 
 export type AuthContextProps = {
   user: User;
@@ -33,6 +34,7 @@ export const AuthContextProvider: React.FC = (props) => {
   const handleLogout = () => {
     setTokenPayload({} as TokenPayload);
     setUser({} as User);
+    api.resetStore();
   };
 
   const isAdmin = () => {
