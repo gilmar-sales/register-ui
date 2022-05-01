@@ -44,11 +44,13 @@ const RegistersList: React.FC<RegistersListProps> = ({ registers }) => {
                     width="5px"
                     height="2rem"
                     bg={register.type === "in" ? "green.300" : "red.300"}
-                    marginRight="25%"
+                    marginRight="20%"
                     borderRadius="1rem"
                   />
                   <Box>
-                    <Text fontSize="2xl">{register.user.name}</Text>
+                    <Text fontSize={{ sm: "sm", md: "md", lg: "2xl" }}>
+                      {register.user.name}
+                    </Text>
                     <Text fontSize="xs">
                       {Number(register.user.id).toString().padStart(3, "0")}
                     </Text>
