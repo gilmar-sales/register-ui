@@ -76,26 +76,26 @@ const Login: React.FC = () => {
       alignItems="center"
       overflow="auto"
     >
-      <Logo w={"400px"} marginBottom={{ md: "3rem", lg: "none" }} />
-      <Flex width={"100%"} justifyContent="flex-end">
+      <Logo w="400px" marginBottom={{ md: "3rem", lg: "none" }} />
+      <Flex width="100%" justifyContent="flex-end">
         <Box
-          height={"650px"}
-          width={"650px"}
-          bgImage={"url(shape.svg)"}
-          bgSize={"cover"}
-          backgroundPosition={"left"}
-          p={"4rem"}
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"center"}
+          height="650px"
+          width="650px"
+          bgImage="url(shape.svg)"
+          bgSize="cover"
+          backgroundPosition="left"
+          p="4rem"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
         >
           <form onSubmit={handleSubmit}>
             <Flex
-              direction={"column"}
+              direction="column"
               gap="1rem"
               bg="white"
-              borderRadius={"2rem"}
-              p={"2rem"}
+              borderRadius="2rem"
+              p="2rem"
             >
               <FormControl isRequired>
                 <FormLabel htmlFor="email">E-mail</FormLabel>
@@ -117,7 +117,7 @@ const Login: React.FC = () => {
               </FormControl>
               <Button
                 type="submit"
-                bgColor={"green.400"}
+                bgColor="green.400"
                 color="white"
                 _hover={{ bgColor: "green.300" }}
                 _active={{ bgColor: "green.500" }}
