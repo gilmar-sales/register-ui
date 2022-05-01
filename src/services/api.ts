@@ -13,6 +13,17 @@ const wsLink = new WebSocketLink({
   uri: "ws://127.0.0.1:3333/graphql", // use wss for a secure endpoint
   options: {
     reconnect: true,
+    connectionParams: () => {
+      const { access_token }: TokenPayload = JSON.parse(
+        localStorage.getItem("@token_payload") || "{}"
+      );
+
+      return {
+        headers: {
+          authorization: `Bearer ${access_token}`,
+        },
+      };
+    },
   },
 });
 
