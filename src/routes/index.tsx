@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 import LoginPage from "../pages/Login";
 import DashboardPage from "../pages/Dashboard";
 import RegistersPage from "../pages/Registers";
-
-import ProtectedRoute from "./ProtectedRoute";
+import Unauthorized from "../pages/Unauthorized";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const AppRoutes: React.FC = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
         </Route>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
