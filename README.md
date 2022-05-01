@@ -37,7 +37,7 @@ The development proposal consists of the implementation of a system for the mana
 # Technologies
 
 - [ReactJS](https://reactjs.org/): A declarative, efficient, and flexible JavaScript library for building user interfaces.
-- [MaterialUI](https://material-ui.com/): Material-UI is a simple and customizable component library to build faster, beautiful, and more accessible React applications.
+- [ChakraUI](https://chakra-ui.com/): Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
 - [GraphQL](https://github.com/graphql/graphql-js): GraphQL is a query language and execution engine tied to any backend service.
 
 ## Installation
